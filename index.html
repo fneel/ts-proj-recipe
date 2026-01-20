@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TypeScript Eget Projekt</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./dist/index.js" defer></script>
+  </head>
+
+  <body>
+    <header id="main-header" class="main-header">
+      <div class="header-content">
+      <div class="search-input">
+        <input
+        type="text"
+        placeholder="Sök recept..."
+        id="search-input"
+        class="search-input"
+
+        aria-label="Sök efter recept"
+      />
+      </div>
+      <div class="cta-section-1">
+        <label for="open-modal-btn">Lägg till nytt recept</label>
+        <button id="open-modal-btn" class="btn open-modal-btn">
+          Nytt recept
+        </button>
+      </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content"></main>
+
+    <dialog id="add-recipe-dialog" class="modal">
+      <form id="add-recipe-form" class="modal-form">
+        <h2>Lägg till nytt recept</h2>
+        <label for="title-input">Recepttitel:</label>
+        <input
+          type="text"
+          id="title-input"
+          class="input-field"
+          name="title-input"
+          required
+        />
+
+        <label for="time-input">Tillagningstid (minuter):</label>
+        <input
+          type="text"
+          id="time-input"
+          class="input-field"
+          name="time-input"
+          required
+        />
+
+        <label for="image-input">Bild-URL:</label>
+        <input
+          type="url"
+          id="image-input"
+          class="input-field"
+          name="image-input"
+          required
+        />
+
+        <label for="ingredients-input"
+          >Ingredienser (separerade med kommatecken):</label
+        >
+        <input
+          type="text"
+          id="ingredients-input"
+          class="input-field"
+          name="ingredients-input"
+          required
+        />
+
+        <button type="button" id="close-modal-btn" class="btn-secondary">
+          Avbryt
+        </button>
+        <button type="submit" id="save-recipe-btn" class="btn-primary">
+          Spara
+        </button>
+      </form>
+    </dialog>
+  </body>
+</html>
