@@ -74,7 +74,6 @@ const recipeIngredients = document.getElementById("skin-ingredients");
 
 const searchInput = document.querySelector("#search-input") as HTMLInputElement;
 
-
 const dialog = document.getElementById(
   "add-recipe-dialog",
 ) as HTMLDialogElement;
@@ -93,65 +92,52 @@ const ingredientsInput = document.querySelector(
   "#ingredients-input",
 ) as HTMLInputElement;
 
-
-
 // --- FUNKTIONALITET - RENDER RECIPES ---
 
 function renderRecipe() {
-  if (recipeContainer) { 
+  if (recipeContainer) {
     recipeContainer.replaceChildren();
   }
 
-  recipes.forEach(({ title, image, time, ingredients }) => {
+  recipes.forEach(({ id, title, image, time, ingredients }) => {
     const recipeElement = document.createElement("article");
     recipeElement.classList.add("recipe-item");
+    recipeElement.dataset.id = String(id);
 
     const img = document.createElement("img");
     img.src = image;
     img.alt = title;
-    
+
     const titleElement = document.createElement("h3");
     titleElement.textContent = title;
 
     const timeElement = document.createElement("p");
-    timeElement.textContent = `${time} minutes to craft`;
+    timeElement.textContent = `${time} minuter`;
 
     const ul = document.createElement("ul");
-    
-    
+
     ingredients.forEach((ingredient) => {
       const li = document.createElement("li");
       li.textContent = `${ingredient.name} - ${ingredient.amount}`;
       ul.appendChild(li);
     });
-  
+
     recipeElement.append(img, titleElement, timeElement, ul);
     console.log("Appending recipe to DOM:", title);
-    
-    //EVENT LISTENER - activate recipe on click
-    recipeElement.addEventListener("click", () => {
-      const currentActive = document.querySelector(".recipe-item.active");
-      if (currentActive) { 
-        currentActive.classList.remove("active");
-      }
-      recipeElement.classList.add("active");
-    });
 
     if (recipeContainer) {
       recipeContainer.append(recipeElement);
     }
-  })
+  });
 }
 
-
-
 //LOCAL STORAGE FUNCTIONALITY
-const saveToLocalStorage = () => { 
+const saveToLocalStorage = () => {
   const jsonString = JSON.stringify(recipes);
   localStorage.setItem("allMyRecipes", jsonString);
 
-  console.log("JSON", jsonString); 
-}
+  console.log("JSON", jsonString);
+};
 
 const loadFromLocalStorage = () => {
   const storedData = localStorage.getItem("allMyRecipes");
@@ -164,13 +150,35 @@ const loadFromLocalStorage = () => {
     recipes.push(...parsedData);
     console.log("Loaded recipes from localStorage:", recipes);
   }
-  
 };
 
 renderRecipe();
 console.log("Initial recipes rendered");
 
+//Event Delegation for activating recipe cards
+if (recipeContainer) {
+  recipeContainer.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
 
+    //find closest recipe item
+    const recipeItem = target.closest(".recipe-item") as HTMLElement;
+
+    //doesnt work
+    if (!recipeItem) return;
+
+    const idStr = recipeItem.dataset.id;
+    if (idStr) {
+      const id = Number(idStr);
+      const currentActive = document.querySelector(".recipe-item.active");
+      if (currentActive) {
+        currentActive.classList.remove("active");
+      }
+      recipeItem.classList.add("active");
+
+      console.log(id);
+    }
+  });
+}
 
 openBtn.addEventListener("click", () => {
   dialog?.showModal();
@@ -179,8 +187,6 @@ openBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
   dialog?.close();
 });
-
-
 
 //LÄGG TILL RECEPT
 
@@ -191,8 +197,7 @@ addForm.addEventListener("submit", (e) => {
   const image = imageInput.value;
   const ingredientsRaw = ingredientsInput.value;
   const timeStr = timeInput.value;
-  
-  
+
   const [hrStr, minStr] = timeStr.split(":");
   const hours = Number(hrStr);
   const minutes = Number(minStr);
@@ -223,13 +228,13 @@ addForm.addEventListener("submit", (e) => {
   console.log("New recipe created:", newRecipe);
 
   recipes.push(newRecipe);
-  
+
   saveToLocalStorage();
   renderRecipe();
 
   console.log("Recipes array after push:", recipes);
   console.log("About to render new recipe");
-  
+
   console.log(recipes);
   addForm.reset();
   dialog?.close();
@@ -247,7 +252,7 @@ if (searchInput) {
     console.log("Found recipe cards:", allCards.length);
 
     allCards.forEach((recipeItem) => {
-      const title = recipeItem .querySelector("h3")?.textContent?.toLowerCase();
+      const title = recipeItem.querySelector("h3")?.textContent?.toLowerCase();
       console.log("Card title:", title);
 
       if (title?.includes(searchTerm)) {
@@ -261,7 +266,7 @@ if (searchInput) {
   });
 } else {
   console.log("Search input not found!");
-} 
+}
 
 loadFromLocalStorage();
 renderRecipe();

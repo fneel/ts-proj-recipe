@@ -1,0 +1,33 @@
+    //EVENT LISTENER - activate recipe on click
+/*     recipeElement.addEventListener("click", () => {
+      const currentActive = document.querySelector(".recipe-item.active");
+      if (currentActive) { 
+        currentActive.classList.remove("active");
+      }
+      recipeElement.classList.add("active");
+    }); */
+
+
+    //Event Delegation for activating recipe cards
+if (recipeContainer) { 
+  recipeContainer.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+
+    //find closest recipe item
+    const recipeItem = target.closest(".recipe-item") as HTMLElement;
+    
+    const currentActive = document.querySelector(".recipe-item.active");
+    
+    if (recipeItem) {
+      // Clicked on a recipe item
+      if (currentActive) currentActive.classList.remove("active");
+      recipeItem.classList.add("active");
+      
+      const id = recipeItem.dataset.id;
+      if (id) console.log("You highlighted:", id);
+    } else {
+      // Clicked outside recipe items
+      if (currentActive) currentActive.classList.remove("active");
+    }
+  });
+}

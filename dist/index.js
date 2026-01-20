@@ -72,16 +72,17 @@ function renderRecipe() {
     if (recipeContainer) {
         recipeContainer.replaceChildren();
     }
-    recipes.forEach(({ title, image, time, ingredients }) => {
+    recipes.forEach(({ id, title, image, time, ingredients }) => {
         const recipeElement = document.createElement("article");
         recipeElement.classList.add("recipe-item");
+        recipeElement.dataset.id = String(id);
         const img = document.createElement("img");
         img.src = image;
         img.alt = title;
         const titleElement = document.createElement("h3");
         titleElement.textContent = title;
         const timeElement = document.createElement("p");
-        timeElement.textContent = `${time} minutes to craft`;
+        timeElement.textContent = `${time} minuter`;
         const ul = document.createElement("ul");
         ingredients.forEach((ingredient) => {
             const li = document.createElement("li");
@@ -90,14 +91,6 @@ function renderRecipe() {
         });
         recipeElement.append(img, titleElement, timeElement, ul);
         console.log("Appending recipe to DOM:", title);
-        //EVENT LISTENER - activate recipe on click
-        recipeElement.addEventListener("click", () => {
-            const currentActive = document.querySelector(".recipe-item.active");
-            if (currentActive) {
-                currentActive.classList.remove("active");
-            }
-            recipeElement.classList.add("active");
-        });
         if (recipeContainer) {
             recipeContainer.append(recipeElement);
         }
@@ -121,6 +114,27 @@ const loadFromLocalStorage = () => {
 };
 renderRecipe();
 console.log("Initial recipes rendered");
+//Event Delegation for activating recipe cards
+if (recipeContainer) {
+    recipeContainer.addEventListener("click", (e) => {
+        const target = e.target;
+        //find closest recipe item
+        const recipeItem = target.closest(".recipe-item");
+        //doesnt work
+        if (!recipeItem)
+            return;
+        const idStr = recipeItem.dataset.id;
+        if (idStr) {
+            const id = Number(idStr);
+            const currentActive = document.querySelector(".recipe-item.active");
+            if (currentActive) {
+                currentActive.classList.remove("active");
+            }
+            recipeItem.classList.add("active");
+            console.log(id);
+        }
+    });
+}
 openBtn.addEventListener("click", () => {
     dialog?.showModal();
 });
