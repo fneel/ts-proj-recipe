@@ -90,7 +90,17 @@ function renderRecipe() {
         });
         recipeElement.append(img, titleElement, timeElement, ul);
         console.log("Appending recipe to DOM:", title);
-        recipeContainer.appendChild(recipeElement);
+        //EVENT LISTENER - activate recipe on click
+        recipeElement.addEventListener("click", () => {
+            const currentActive = document.querySelector(".recipe-item.active");
+            if (currentActive) {
+                currentActive.classList.remove("active");
+            }
+            recipeElement.classList.add("active");
+        });
+        if (recipeContainer) {
+            recipeContainer.append(recipeElement);
+        }
     });
 }
 //LOCAL STORAGE FUNCTIONALITY
@@ -124,7 +134,6 @@ addForm.addEventListener("submit", (e) => {
     const title = titleInput.value;
     const image = imageInput.value;
     const ingredientsRaw = ingredientsInput.value;
-    //TIME
     const timeStr = timeInput.value;
     const [hrStr, minStr] = timeStr.split(":");
     const hours = Number(hrStr);
@@ -159,6 +168,7 @@ addForm.addEventListener("submit", (e) => {
     addForm.reset();
     dialog?.close();
 });
+// SEARCH FUNCTIONALITY
 if (searchInput) {
     searchInput.addEventListener("input", (e) => {
         const target = e.target;

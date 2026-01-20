@@ -151,6 +151,10 @@ ul {
   line-height: 1.3lh;
 }
 
+.recipe-item.active {
+  border: 2px solid purple;
+}
+
 .save-btn {
   width: 100%;
   padding: 10px;
@@ -205,6 +209,8 @@ ul {
 .hidden {
   display: none;
 }
+
+
 
 /* @media (max-width: 768px) {
   main {

@@ -125,10 +125,21 @@ function renderRecipe() {
       ul.appendChild(li);
     });
   
-
     recipeElement.append(img, titleElement, timeElement, ul);
     console.log("Appending recipe to DOM:", title);
-  recipeContainer.appendChild(recipeElement);
+    
+    //EVENT LISTENER - activate recipe on click
+    recipeElement.addEventListener("click", () => {
+      const currentActive = document.querySelector(".recipe-item.active");
+      if (currentActive) { 
+        currentActive.classList.remove("active");
+      }
+      recipeElement.classList.add("active");
+    });
+
+    if (recipeContainer) {
+      recipeContainer.append(recipeElement);
+    }
   })
 }
 
