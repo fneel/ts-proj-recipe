@@ -1,89 +1,28 @@
-interface Recipe {
-  id: number;
-  title: string;
-  time: number;
-  image: string;
-  ingredients: Ingredients[];
-}
+import type { Recipe } from "./models/Recipe.js";
+import { renderRecipe } from "./components/RecipeList.js";
+import { saveRecipes, loadFromLocalStorage } from "./utils/Storage.js";
+import { getRecipes } from "./services/RecipeService.js";
 
-interface Ingredients {
-  name: string;
-  amount: string;
-}
 
-const recipes: Recipe[] = [
-  {
-    id: 1,
-    title: "Köttbullar",
-    time: 10,
-    image: "https://placehold.co/600x400",
-    ingredients: [
-      { name: "Mjöl", amount: "2 dl" },
-      { name: "Mjölk", amount: "3 dl" },
-      { name: "Ägg", amount: "2 st" },
-      { name: "Salt", amount: "1 krm" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Korvstroganoff",
-    time: 15,
-    image: "https://placehold.co/600x400",
-    ingredients: [
-      { name: "Mjöl", amount: "2 dl" },
-      { name: "Mjölk", amount: "3 dl" },
-      { name: "Ägg", amount: "2 st" },
-      { name: "Salt", amount: "1 krm" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Fiskgratäng",
-    time: 20,
-    image: "https://placehold.co/600x400",
-    ingredients: [
-      { name: "Mjöl", amount: "2 dl" },
-      { name: "Mjölk", amount: "3 dl" },
-      { name: "Ägg", amount: "2 st" },
-      { name: "Salt", amount: "1 krm" },
-    ],
-  },
-  {
-    id: 4,
-    title: "Pannacotta",
-    time: 25,
-    image: "https://placehold.co/600x400",
-    ingredients: [
-      { name: "Mjöl", amount: "2 dl" },
-      { name: "Mjölk", amount: "3 dl" },
-      { name: "Ägg", amount: "2 st" },
-      { name: "Salt", amount: "1 krm" },
-    ],
-  },
-];
+// --- DOM / VARIABLER ---
 
-//DOM / VARIABLER
-const recipeContainer = document.getElementById("main-content") as HTMLElement;
+// --- RECIPE CONTAINER ---
+const recipeContainer = document.querySelector("#main-content") as HTMLElement;
 console.log("recipeContainer found:", recipeContainer);
 
-const asideContainer = document.getElementById("aside-container");
-const recipeTitle = document.getElementById("skin-title");
-const recipeImage = document.getElementById("skin-image") as HTMLImageElement;
-const recipeTime = document.getElementById("skin-price");
-const recipeIngredients = document.getElementById("skin-ingredients");
-
+// --- SEARCH INPUT ---
 const searchInput = document.querySelector("#search-input") as HTMLInputElement;
 
-const dialog = document.getElementById(
-  "add-recipe-dialog",
-) as HTMLDialogElement;
-
+// --- BUTTONS ---
 const openBtn = document.querySelector("#open-modal-btn") as HTMLButtonElement;
 const closeBtn = document.querySelector(
   "#close-modal-btn",
 ) as HTMLButtonElement;
-const saveBtn = document.querySelector("#save-recipe-btn") as HTMLButtonElement;
 
+// --- FORM ELEMENTS ---
+const dialog = document.getElementById(
+  "add-recipe-dialog",
+) as HTMLDialogElement;
 const addForm = document.querySelector("#add-recipe-form") as HTMLFormElement;
 const titleInput = document.querySelector("#title-input") as HTMLInputElement;
 const timeInput = document.querySelector("#time-input") as HTMLInputElement;
@@ -92,70 +31,24 @@ const ingredientsInput = document.querySelector(
   "#ingredients-input",
 ) as HTMLInputElement;
 
-// --- FUNKTIONALITET - RENDER RECIPES ---
 
-function renderRecipe() {
-  if (recipeContainer) {
-    recipeContainer.replaceChildren();
-  }
+// --- INITIAL RENDERING OF RECIPES ---
+const recipes: Recipe[] = []; //namn??
+const apiRecipes = getRecipes();
+const storedRecipes = loadFromLocalStorage();
 
-  recipes.forEach(({ id, title, image, time, ingredients }) => {
-    const recipeElement = document.createElement("article");
-    recipeElement.classList.add("recipe-item");
-    recipeElement.dataset.id = String(id);
-
-    const img = document.createElement("img");
-    img.src = image;
-    img.alt = title;
-
-    const titleElement = document.createElement("h3");
-    titleElement.textContent = title;
-
-    const timeElement = document.createElement("p");
-    timeElement.textContent = `${time} minuter`;
-
-    const ul = document.createElement("ul");
-
-    ingredients.forEach((ingredient) => {
-      const li = document.createElement("li");
-      li.textContent = `${ingredient.name} - ${ingredient.amount}`;
-      ul.appendChild(li);
-    });
-
-    recipeElement.append(img, titleElement, timeElement, ul);
-    console.log("Appending recipe to DOM:", title);
-
-    if (recipeContainer) {
-      recipeContainer.append(recipeElement);
-    }
-  });
+if (storedRecipes.length > 0) {
+  recipes.push(...storedRecipes);
+} else {
+  recipes.push(...apiRecipes);
+  saveRecipes(recipes);
 }
 
-//LOCAL STORAGE FUNCTIONALITY
-const saveToLocalStorage = () => {
-  const jsonString = JSON.stringify(recipes);
-  localStorage.setItem("allMyRecipes", jsonString);
-
-  console.log("JSON", jsonString);
-};
-
-const loadFromLocalStorage = () => {
-  const storedData = localStorage.getItem("allMyRecipes");
-
-  if (storedData) {
-    const parsedData: Recipe[] = JSON.parse(storedData) as Recipe[];
-
-    //Töm listan och fyll på med det som finns i localStorage
-    recipes.length = 0;
-    recipes.push(...parsedData);
-    console.log("Loaded recipes from localStorage:", recipes);
-  }
-};
-
-renderRecipe();
+renderRecipe("main-content", recipes);
 console.log("Initial recipes rendered");
 
-//Event Delegation for activating recipe cards
+
+//Event Delegation for activating recipe cards (cosmetic only)
 if (recipeContainer) {
   recipeContainer.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
@@ -180,6 +73,8 @@ if (recipeContainer) {
   });
 }
 
+
+// --- DIALOG FUNCTIONALITY ---
 openBtn.addEventListener("click", () => {
   dialog?.showModal();
 });
@@ -188,8 +83,8 @@ closeBtn.addEventListener("click", () => {
   dialog?.close();
 });
 
-//LÄGG TILL RECEPT
 
+// --- ADD RECIPE FORM FUNCTIONALITY ---
 addForm.addEventListener("submit", (e) => {
   console.log("SUBMIT TRIGGERED");
   e.preventDefault();
@@ -229,8 +124,8 @@ addForm.addEventListener("submit", (e) => {
 
   recipes.push(newRecipe);
 
-  saveToLocalStorage();
-  renderRecipe();
+  saveRecipes(recipes);
+  renderRecipe("main-content", recipes);
 
   console.log("Recipes array after push:", recipes);
   console.log("About to render new recipe");
@@ -240,8 +135,8 @@ addForm.addEventListener("submit", (e) => {
   dialog?.close();
 });
 
-// SEARCH FUNCTIONALITY
 
+// --- SEARCH FUNCTIONALITY ---
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     const target = e.target as HTMLInputElement;
@@ -268,5 +163,4 @@ if (searchInput) {
   console.log("Search input not found!");
 }
 
-loadFromLocalStorage();
-renderRecipe();
+
