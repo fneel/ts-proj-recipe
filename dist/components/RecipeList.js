@@ -13,8 +13,11 @@ export const renderRecipe = (containerId, recipes) => {
         const titleElement = document.createElement("h3");
         titleElement.textContent = title;
         const timeElement = document.createElement("p");
-        timeElement.textContent = `${time} minuter`;
+        timeElement.textContent = `${time} min`;
+        timeElement.classList.add("recipe-time");
         const ul = document.createElement("ul");
+        ul.textContent = "Ingredients:";
+        ul.classList.add("ingredient-list");
         ingredients.forEach((ingredient) => {
             const li = document.createElement("li");
             li.textContent = `${ingredient.name} - ${ingredient.amount}`;

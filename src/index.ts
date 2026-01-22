@@ -4,6 +4,8 @@ import { saveRecipes, loadFromLocalStorage } from "./utils/Storage.js";
 import { getRecipes } from "./services/RecipeService.js";
 
 
+/* p27GfJIZYBJN6PFQgHZbvdoySmSglXOBwrPrzW6TIYC5DIn8OdjrykDM */ 
+
 // --- DOM / VARIABLER ---
 
 // --- RECIPE CONTAINER ---
@@ -34,18 +36,38 @@ const ingredientsInput = document.querySelector(
 
 // --- INITIAL RENDERING OF RECIPES ---
 const recipes: Recipe[] = []; //namn??
-const apiRecipes = getRecipes();
-const storedRecipes = loadFromLocalStorage();
 
-if (storedRecipes.length > 0) {
-  recipes.push(...storedRecipes);
-} else {
-  recipes.push(...apiRecipes);
-  saveRecipes(recipes);
+
+//här burkar man visa tex spinner el liknande som visar att systemet jobbar/tänker
+async function initApp() {
+  console.log("Initierar app, hämtar data...");
+
+  try {
+    // Load from both sources and merge
+    const storedRecipes = loadFromLocalStorage();
+    const apiRecipes = await getRecipes();
+    
+    // Merge: start with API recipes, then add/overwrite with stored recipes
+    const mergedRecipes = [...apiRecipes];
+    
+    storedRecipes.forEach((storedRecipe) => {
+      const exists = mergedRecipes.some((recipe) => recipe.id === storedRecipe.id);
+      if (!exists) {
+        mergedRecipes.push(storedRecipe);
+      }
+    });
+    
+    recipes.push(...mergedRecipes);
+    console.log("Loaded recipes from both API and localStorage:", recipes.length);
+
+    renderRecipe("main-content", recipes);
+  } catch (error) { 
+    console.log("Fel", error); 
+   }
+
 }
 
-renderRecipe("main-content", recipes);
-console.log("Initial recipes rendered");
+initApp();
 
 
 //Event Delegation for activating recipe cards (cosmetic only)

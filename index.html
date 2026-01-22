@@ -5,31 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TypeScript Eget Projekt</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
     <script type="module" src="./dist/index.js" defer></script>
   </head>
 
   <body>
     <header id="main-header" class="main-header">
-              <span class="logo">Receptbok</span>
+      <div class="logo-container">
+        <img
+          src="./src/graphics/laga_logo.png"
+          alt="Receptbok Logo"
+          class="logo-img"
+        />
+        <span class="logo">Vad har du i skafferiet?</span>
+      </div>
 
-      <div class="header-content">
       <div class="search-input">
         <input
-        type="text"
-        placeholder="Sök recept..."
-        id="search-input"
-        class="search-input"
+          type="text"
+          placeholder="Sök recept..."
+          id="search-input"
+          class="search-input"
+          aria-label="Sök efter recept"
+        />
+      </div>
+      <div class="nav-container">
+        <nav class="nav-links">
+          <a href="#" id="nav-link" class="nav-link">Hem</a>
+          <a href="#" id="nav-link" class="nav-link">Recept</a>
+          <a href="#" id="nav-link" class="nav-link">Om oss</a>
+        </nav>
 
-        aria-label="Sök efter recept"
-      />
       </div>
-      <div class="cta-section-1">
-        <label for="open-modal-btn">Lägg till nytt recept</label>
-        <button id="open-modal-btn" class="btn open-modal-btn">
-          Nytt recept
-        </button>
-      </div>
-      </div>
+              <div class="cta-section-1">
+          <label class="btn-label" for="open-modal-btn">Lägg till nytt recept</label>
+          <button id="open-modal-btn" class="btn btn-primary">
+            Nytt recept
+          </button>
+        </div>
     </header>
 
     <main id="main-content" class="main-content"></main>

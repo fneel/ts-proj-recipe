@@ -1,3 +1,12 @@
+   TODO:
+   variables for color, text, sizes etc.
+
+   sökfunktion: tanken är att man ska kunna söka på ingredienser man har hemma för att sedan få upp matchande recept
+   
+   
+   
+   
+   
     //EVENT LISTENER - activate recipe on click
 /*     recipeElement.addEventListener("click", () => {
       const currentActive = document.querySelector(".recipe-item.active");

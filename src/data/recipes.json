@@ -1,0 +1,190 @@
+[
+  {
+    "id": 1,
+    "title": "Köttbullar",
+    "time": 10,
+    "image": "https://www.sourcesplash.com/i/random?q=food",
+    "ingredients": [
+      { "name": "Mjöl", "amount": "2 dl" },
+      { "name": "Mjölk", "amount": "3 dl" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Fiskgratäng",
+    "time": 20,
+    "image": "https://www.sourcesplash.com/i/random?q=food",
+    "ingredients": [
+      { "name": "Ägg", "amount": "2 st" },
+      { "name": "Salt", "amount": "1 krm" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Spaghetti Carbonara",
+    "time": 15,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Spaghetti", "amount": "400 g" },
+      { "name": "Bacon", "amount": "150 g" },
+      { "name": "Ägg", "amount": "3 st" },
+      { "name": "Parmesan", "amount": "1 dl" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Kycklinggryta",
+    "time": 30,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Kycklingfilé", "amount": "500 g" },
+      { "name": "Grädde", "amount": "3 dl" },
+      { "name": "Paprika", "amount": "1 st" },
+      { "name": "Gul lök", "amount": "1 st" }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Vegetarisk lasagne",
+    "time": 45,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Lasagneplattor", "amount": "12 st" },
+      { "name": "Zucchini", "amount": "1 st" },
+      { "name": "Krossade tomater", "amount": "400 g" },
+      { "name": "Riven ost", "amount": "2 dl" }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Pannkakor",
+    "time": 20,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Mjöl", "amount": "2,5 dl" },
+      { "name": "Mjölk", "amount": "6 dl" },
+      { "name": "Ägg", "amount": "3 st" },
+      { "name": "Smör", "amount": "50 g" }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Räksallad",
+    "time": 10,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Räkor", "amount": "300 g" },
+      { "name": "Romansallad", "amount": "1 st" },
+      { "name": "Avokado", "amount": "1 st" },
+      { "name": "Citron", "amount": "1/2 st" }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Chili con carne",
+    "time": 40,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Nötfärs", "amount": "500 g" },
+      { "name": "Kidneybönor", "amount": "1 burk" },
+      { "name": "Krossade tomater", "amount": "400 g" },
+      { "name": "Chili", "amount": "1 st" }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Lax i ugn",
+    "time": 25,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Laxfilé", "amount": "600 g" },
+      { "name": "Citron", "amount": "1 st" },
+      { "name": "Dill", "amount": "1 kruka" },
+      { "name": "Smör", "amount": "50 g" }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Svamprisotto",
+    "time": 35,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Arborioris", "amount": "3 dl" },
+      { "name": "Champinjoner", "amount": "250 g" },
+      { "name": "Grönsaksbuljong", "amount": "8 dl" },
+      { "name": "Parmesan", "amount": "1 dl" }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Tacopaj",
+    "time": 45,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Pajdeg", "amount": "1 st" },
+      { "name": "Nötfärs", "amount": "400 g" },
+      { "name": "Tacokrydda", "amount": "1 påse" },
+      { "name": "Crème fraiche", "amount": "2 dl" }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Tomatsoppa",
+    "time": 20,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Krossade tomater", "amount": "500 g" },
+      { "name": "Vitlök", "amount": "2 klyftor" },
+      { "name": "Grönsaksbuljong", "amount": "5 dl" },
+      { "name": "Grädde", "amount": "1 dl" }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Biff med bearnaisesås",
+    "time": 30,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Entrecôte", "amount": "2 skivor" },
+      { "name": "Smör", "amount": "50 g" },
+      { "name": "Bearnaisesås", "amount": "2 dl" },
+      { "name": "Potatis", "amount": "500 g" }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Pad Thai",
+    "time": 25,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Risnudlar", "amount": "250 g" },
+      { "name": "Kyckling", "amount": "300 g" },
+      { "name": "Ägg", "amount": "2 st" },
+      { "name": "Fisksås", "amount": "2 msk" }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Hamburgare",
+    "time": 20,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Hamburgerbröd", "amount": "4 st" },
+      { "name": "Nötfärs", "amount": "500 g" },
+      { "name": "Cheddarost", "amount": "4 skivor" },
+      { "name": "Sallad", "amount": "1 huvud" }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Äppelpaj",
+    "time": 50,
+    "image": "https://placehold.co/600x400",
+    "ingredients": [
+      { "name": "Äpplen", "amount": "4 st" },
+      { "name": "Socker", "amount": "1 dl" },
+      { "name": "Smör", "amount": "125 g" },
+      { "name": "Vetemjöl", "amount": "3 dl" }
+    ]
+  }
+]
