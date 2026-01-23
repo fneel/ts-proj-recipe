@@ -16,7 +16,7 @@ export const renderRecipe = (containerId, recipes) => {
         timeElement.textContent = `${time} min`;
         timeElement.classList.add("recipe-time");
         const ul = document.createElement("ul");
-        ul.textContent = "Ingredients:";
+        ul.textContent = "Ingredienser:";
         ul.classList.add("ingredient-list");
         ingredients.forEach((ingredient) => {
             const li = document.createElement("li");

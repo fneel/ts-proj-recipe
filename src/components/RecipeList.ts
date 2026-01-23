@@ -24,7 +24,7 @@ export const renderRecipe = (containerId: string, recipes: Recipe[]) => {
     timeElement.classList.add("recipe-time");
 
     const ul = document.createElement("ul");
-    ul.textContent = "Ingredients:";
+    ul.textContent = "Ingredienser:";
     ul.classList.add("ingredient-list");
 
 
