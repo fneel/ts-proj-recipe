@@ -3,7 +3,7 @@ export const renderRecipe = (containerId, recipes) => {
     if (!container)
         return;
     container.replaceChildren(); // to clear existing content  
-    recipes.forEach(({ id, title, image, time, ingredients }) => {
+    recipes.forEach(({ id, title, image, time, ingredients, instructions }) => {
         const recipeElement = document.createElement("article");
         recipeElement.classList.add("recipe-item");
         recipeElement.dataset.id = String(id);
@@ -23,7 +23,17 @@ export const renderRecipe = (containerId, recipes) => {
             li.textContent = `${ingredient.name} - ${ingredient.amount}`;
             ul.appendChild(li);
         });
-        recipeElement.append(img, titleElement, timeElement, ul);
+        const instructionsUl = document.createElement("ul");
+        instructionsUl.textContent = "Instruktioner:";
+        instructionsUl.classList.add("instructions-list");
+        if (instructions && instructions.length > 0) {
+            instructions.forEach((instruction) => {
+                const li = document.createElement("li");
+                li.textContent = `- ${instruction.steps}`;
+                instructionsUl.appendChild(li);
+            });
+        }
+        recipeElement.append(img, titleElement, timeElement, ul, instructionsUl);
         console.log("Appending recipe to DOM:", title);
         if (container) {
             container.append(recipeElement);

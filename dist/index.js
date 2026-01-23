@@ -18,6 +18,7 @@ const titleInput = document.querySelector("#title-input");
 const timeInput = document.querySelector("#time-input");
 const imageInput = document.querySelector("#image-input");
 const ingredientsInput = document.querySelector("#ingredients-input");
+const instructionsInput = document.querySelector("#instructions-input");
 // --- INITIAL RENDERING OF RECIPES ---
 const recipes = []; //namn??
 //här burkar man visa tex spinner el liknande som visar att systemet jobbar/tänker
@@ -43,7 +44,6 @@ async function initApp() {
         console.log("Fel", error);
     }
 }
-initApp();
 //event Delegation for activating recipe cards (cosmetic only)
 if (recipeContainer) {
     recipeContainer.addEventListener("click", (e) => {
@@ -86,6 +86,7 @@ addForm.addEventListener("submit", (e) => {
     const image = imageInput.value;
     const ingredientsRaw = ingredientsInput.value;
     const timeStr = timeInput.value;
+    const instructions = instructionsInput.value;
     const [hrStr, minStr] = timeStr.split(":");
     const hours = Number(hrStr);
     const minutes = Number(minStr);
@@ -106,6 +107,11 @@ addForm.addEventListener("submit", (e) => {
             return {
                 name: parts[0]?.trim() || "",
                 amount: parts[1]?.trim() || "",
+            };
+        }),
+        instructions: instructions.split(",").map((step) => {
+            return {
+                steps: step.trim(),
             };
         }),
     };
@@ -144,3 +150,4 @@ if (searchInput) {
 else {
     console.log("Search input not found!");
 }
+initApp();

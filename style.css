@@ -71,9 +71,9 @@ a {
   --fv-smcaps: small-caps;
 
   /***** SHADOWS *****/
-    --bs-dark: 0 0px 30px 0 rgba(0, 0, 0, 0.2);
-    --bs-dark-red: 0 0px 30px 0 rgba(176, 97, 68, 0.5);
-    --bs-soft-red: 0 0 3rem 0 rgba(176, 97, 68, 0.2);
+  --bs-dark: 0 0px 30px 0 rgba(0, 0, 0, 0.2);
+  --bs-dark-red: 0 0px 30px 0 rgba(176, 97, 68, 0.5);
+  --bs-soft-red: 0 0 3rem 0 rgba(176, 97, 68, 0.2);
 }
 
 .btn-primary {
@@ -222,8 +222,9 @@ header {
   max-width: 1200px;
   margin: 2rem auto;
   height: max-content;
-/*   background-color: var(--color-secondary);
- */}
+  /*   background-color: var(--color-secondary);
+ */
+}
 
 .recipe-item {
   background-color: var(--color-primary);
@@ -241,7 +242,6 @@ header {
   height: 20rem;
 }
 
-
 .recipe-item:hover {
   /* transform: translateY(-5px); */
   box-shadow: var(--bs-dark-red);
@@ -250,10 +250,14 @@ header {
 
 .recipe-item.active {
   border: 2px solid var(--color-accent);
+
+  >.instructions-list {
+    display: block;
+  }
 }
 
 .recipe-item h3 {
-  margin: .2rem 0;
+  margin: 0.2rem 0;
   font-size: var(--fs-l);
   font-weight: var(--fw-bold);
   color: var(--color-accent-dark);
@@ -275,24 +279,42 @@ header {
 }
 
 .ingredient-list {
-  padding: .6rem 0;
+  padding: 0.6rem 0;
   font-size: var(--fs-s);
   color: var(--color-secondary-soft);
   list-style: none;
   line-height: 1.3lh;
   font-weight: var(--fw-bold);
 
-      /* Multi-line truncation properties */  
-white-space: nowrap;
-  overflow: hidden;  
+  /* Multi-line truncation properties */
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 
-
-
-  >li {
+  > li {
     font-weight: var(--fw-regular);
   }
+}
 
+
+/*HIDING the instructions-list while recipe-item is NOT ACTIVE. SHOWING instructions-list when ACTIVE with styling in @recipe-item.active >instructions-list */
+.instructions-list {
+  display: none;
+  padding: 0.6rem 0;
+  font-size: var(--fs-s);
+  color: var(--color-secondary-soft);
+  list-style: none;
+  line-height: 1.3lh;
+  font-weight: var(--fw-bold);
+
+  /* Multi-line truncation properties */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  > li {
+    font-weight: var(--fw-regular);
+  }
 }
 
 

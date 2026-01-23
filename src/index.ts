@@ -32,6 +32,7 @@ const imageInput = document.querySelector("#image-input") as HTMLInputElement;
 const ingredientsInput = document.querySelector(
   "#ingredients-input",
 ) as HTMLInputElement;
+const instructionsInput = document.querySelector("#instructions-input") as HTMLInputElement;
 
 
 // --- INITIAL RENDERING OF RECIPES ---
@@ -67,7 +68,7 @@ async function initApp() {
 
 }
 
-initApp();
+
 
 
 //event Delegation for activating recipe cards (cosmetic only)
@@ -118,6 +119,7 @@ addForm.addEventListener("submit", (e) => {
   const image = imageInput.value;
   const ingredientsRaw = ingredientsInput.value;
   const timeStr = timeInput.value;
+  const instructions = instructionsInput.value;
 
   const [hrStr, minStr] = timeStr.split(":");
   const hours = Number(hrStr);
@@ -143,6 +145,11 @@ addForm.addEventListener("submit", (e) => {
       return {
         name: parts[0]?.trim() || "",
         amount: parts[1]?.trim() || "",
+      };
+    }),
+    instructions: instructions.split(",").map((step) => {
+      return {
+        steps: step.trim(),
       };
     }),
   };
@@ -190,3 +197,4 @@ if (searchInput) {
 }
 
 
+initApp();
