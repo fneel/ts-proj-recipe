@@ -33,14 +33,14 @@ export const renderRecipe = (containerId: string, recipes: Recipe[]) => {
       ul.appendChild(li);
     });
 
-    const instructionsUl = document.createElement("ul");
+    const instructionsUl = document.createElement("ol");
     instructionsUl.textContent = "Instruktioner:";
     instructionsUl.classList.add("instructions-list");
 
     if (instructions && instructions.length > 0) {
       instructions.forEach((instruction) => {
         const li = document.createElement("li");
-        li.textContent = `- ${instruction.steps}`;
+        li.textContent = `${instruction.steps}`;
         instructionsUl.appendChild(li);
       });
     }

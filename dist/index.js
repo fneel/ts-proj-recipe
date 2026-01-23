@@ -44,7 +44,8 @@ async function initApp() {
         console.log("Fel", error);
     }
 }
-//event Delegation for activating recipe cards (cosmetic only)
+//event Delegation for activating recipe cards 
+//when recipe-item is active -> instructions-list: display + height: fit-content (else - instructions is display:none + height: 20rem)
 if (recipeContainer) {
     recipeContainer.addEventListener("click", (e) => {
         const target = e.target;
@@ -135,8 +136,9 @@ if (searchInput) {
         console.log("Found recipe cards:", allCards.length);
         allCards.forEach((recipeItem) => {
             const title = recipeItem.querySelector("h3")?.textContent?.toLowerCase();
-            console.log("Card title:", title);
-            if (title?.includes(searchTerm)) {
+            const ingredient = recipeItem.querySelector(".ingredient-list")?.textContent?.toLowerCase();
+            console.log("Card title:", title, ingredient);
+            if (title?.includes(searchTerm) || ingredient?.includes(searchTerm)) {
                 console.log("MATCH:", title, "includes", searchTerm);
                 recipeItem.classList.remove("hidden");
             }
