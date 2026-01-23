@@ -5,7 +5,7 @@ export const renderRecipe = (containerId: string, recipes: Recipe[]) => {
     const container = document.getElementById(containerId);
     if (!container) return;
     
-    container.replaceChildren(); // Clear existing content  
+    container.replaceChildren(); // to clear existing content  
 
   recipes.forEach(({ id, title, image, time, ingredients }) => {
     const recipeElement = document.createElement("article");

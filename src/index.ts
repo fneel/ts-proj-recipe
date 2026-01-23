@@ -47,7 +47,7 @@ async function initApp() {
     const storedRecipes = loadFromLocalStorage();
     const apiRecipes = await getRecipes();
     
-    // Merge: start with API recipes, then add/overwrite with stored recipes
+    // merge: start with API recipes, then add/overwrite with stored recipes
     const mergedRecipes = [...apiRecipes];
     
     storedRecipes.forEach((storedRecipe) => {
@@ -70,7 +70,7 @@ async function initApp() {
 initApp();
 
 
-//Event Delegation for activating recipe cards (cosmetic only)
+//event Delegation for activating recipe cards (cosmetic only)
 if (recipeContainer) {
   recipeContainer.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
@@ -78,19 +78,23 @@ if (recipeContainer) {
     //find closest recipe item
     const recipeItem = target.closest(".recipe-item") as HTMLElement;
 
-    //doesnt work
-    if (!recipeItem) return;
-
-    const idStr = recipeItem.dataset.id;
-    if (idStr) {
-      const id = Number(idStr);
+    if (recipeItem) {
+      const idStr = recipeItem.dataset.id;
+      if (idStr) {
+        const id = Number(idStr);
+        const currentActive = document.querySelector(".recipe-item.active");
+        if (currentActive) {
+          currentActive.classList.remove("active");
+        }
+        recipeItem.classList.add("active");
+        console.log(id);
+      }
+    } else {
+      // Click was outside any recipe item (OBS only works inside recipeContainer) - remove active class
       const currentActive = document.querySelector(".recipe-item.active");
       if (currentActive) {
         currentActive.classList.remove("active");
       }
-      recipeItem.classList.add("active");
-
-      console.log(id);
     }
   });
 }

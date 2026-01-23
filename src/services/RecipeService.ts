@@ -1,6 +1,6 @@
 import type { Recipe } from "../models/Recipe.js";
 
-const recipes: Recipe[] = [
+/* const recipes: Recipe[] = [
   {
     id: 1,
     title: "Köttbullar",
@@ -50,9 +50,10 @@ const recipes: Recipe[] = [
     ],
   },
 ];
-
+ */
 
 // "kopia" av receptlistan ("encapsulation")
+
 /* export const getRecipes = (): Recipe[] => {
   return [...recipes];
 }; */
